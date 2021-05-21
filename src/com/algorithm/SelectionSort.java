@@ -1,0 +1,116 @@
+package com.algorithm;
+
+import java.util.Scanner;
+
+public class SelectionSort //this is ascending in order
+{
+    final static int total_students = 100;
+    final static String[] names = new String[total_students];
+
+    void AscendingSelectionSort(int[] total_marks){
+        for (int i =0;i<total_students-1;i++)
+        //this outerloop will be for passess
+        {
+            int min = i; //we are initializing the first element as minimum value
+            for (int j=i+1;j<total_students;j++){
+                if (total_marks[j] < total_marks[min]){
+                    min = j;
+                }
+            }
+            if (min!=i){
+                int temp = total_marks[i];
+                total_marks[i]= total_marks[min];
+                total_marks[min]= temp;
+            }
+        }
+    }
+    void DescendingSelectionSort(int[] copy){
+        for (int i =0;i<total_students-1;i++)
+        //this outerloop will be for passess
+        {
+            int max = i; //we are initializing the first element as minimum value
+            for (int j=i+1;j<total_students;j++){
+                if (copy[j] > copy[max]){
+                    max = j;
+                }
+            }
+            if (max!=i){
+                int temp = copy[i];
+                copy[i]= copy[max];
+                copy[max]= temp;
+            }
+        }
+    }
+    void printAscending(int[] total_marks) {
+        System.out.println("==================ASCENDING ORDER========================");
+        for (int i = 0; i < total_students; i++) {
+            System.out.println("\t\t\t"
+                    + total_marks[i]);
+        }
+    }
+
+    void printDescending(int[] copy) {
+        System.out.println("==================DESCENDING ORDER========================");
+        for (int i = 0; i < total_students; i++) {
+            System.out.println("\t\t\t"
+                    + copy[i]);
+        }
+    }
+    void print(int [] beforeSort){
+        System.out.println("=======================BEFORE SORTING ======================");
+            for (int i = 0; i < total_students; i++) {
+                System.out.println("\t\t\t"
+                        + beforeSort[i]);
+            }
+    }
+    public static void main(String[] args)
+    {
+        Scanner obj = new Scanner(System.in);
+
+        //subjects 4
+        int[] s1 = new int[total_students];
+        int[] s2 = new int[total_students];
+        int[] s3 = new int[total_students];
+        int[] s4 = new int[total_students];
+        int[] total_marks = new int[total_students];
+        int[] copy = new int[total_students];
+        int[] beforeSort = new int[total_students];
+
+        for (int i = 0; i < total_students; i++)
+        {
+            System.out.println("enter student " + (i + 1) + " details");
+
+            System.out.println("Name: ");
+            obj.nextLine();
+            names[i] = obj.nextLine();
+            System.out.println("Course CCS201 marks: ");
+            s1[i] = obj.nextInt();
+            System.out.println("Course CCS202 marks: ");
+            s2[i] = obj.nextInt();
+            System.out.println("Course CCS203 marks : ");
+            s3[i] = obj.nextInt();
+            System.out.println("Course CCS204 marks: ");
+            s4[i] = obj.nextInt();
+
+            //total marks
+            total_marks[i] = s1[i] + s2[i] + s3[i] + s4[i];
+            System.out.println();
+
+        }
+        //descending order
+        //first copy the array in another array
+        System.arraycopy(total_marks, 0, copy, 0, total_students);
+        System.arraycopy(total_marks,0,beforeSort,0,total_students);
+
+        SelectionSort s = new SelectionSort();
+      s.print(beforeSort);
+        System.out.println();
+        s.AscendingSelectionSort(total_marks);
+        s.DescendingSelectionSort(copy);
+        s.printAscending(total_marks);
+        System.out.println();
+        s.printDescending(copy);
+
+    }
+
+}
